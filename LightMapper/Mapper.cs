@@ -12,42 +12,77 @@ public static class Mapper
 		if (source == null)
 			throw new ArgumentNullException(nameof(source));
 
-		var destination = new TDestination();
+		return (TDestination)MapInternal(source, typeof(TSource), typeof(TDestination), config)!;
+	}
 
-		var sourceProps = typeof(TSource).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-		var destProps = typeof(TDestination).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+	private static object? MapInternal(object? source, Type sourceType, Type destType, MapperConfig? config)
+	{
+		if (source == null) return null;
 
-		MappingRule? rule = config?.GetMap(typeof(TSource), typeof(TDestination));
-		var custom = (rule as MappingRule<TSource, TDestination>) ?? null;
+		var destination = Activator.CreateInstance(destType)!;
 
-		foreach (var dProp in destProps)
+		// Cache'den mapping bilgilerini al
+		var mappings = MappingCache.GetMappings(sourceType, destType);
+		var rule = config?.GetMap(sourceType, destType);
+
+		// Önce cache'lenmiş mappingleri yap
+		foreach (var mapping in mappings)
 		{
-			if (!dProp.CanWrite) continue;
+			var propName = mapping.DestProperty.Name;
 
 			// 1. Ignore kontrolü
-			if (custom?.IgnoredMembers.Contains(dProp.Name) == true)
+			if (rule?.GetIgnoredMembers().Contains(propName) == true)
 				continue;
 
 			// 2. Custom mapping kontrolü
-			if (custom != null && custom.CustomMappings.TryGetValue(dProp.Name, out var mapFunc))
+			if (rule?.HasCustomMapping(propName) == true)
 			{
-				var value = mapFunc(source!);
-				dProp.SetValue(destination, value);
+				var customValue = rule.GetCustomMapping(propName, source);
+				mapping.DestProperty.SetValue(destination, customValue);
 				continue;
 			}
 
-			// 3. Normal mapping (aynı isim + tip)
-			var sProp = sourceProps.FirstOrDefault(p =>
-				p.Name == dProp.Name &&
-				p.PropertyType == dProp.PropertyType);
+			// 3. Normal/Nested mapping
+			var sourceValue = mapping.SourceProperty.GetValue(source);
 
-			if (sProp != null)
+			if (mapping.Type == MappingType.Direct)
 			{
-				var value = sProp.GetValue(source);
-				dProp.SetValue(destination, value);
+				mapping.DestProperty.SetValue(destination, sourceValue);
+			}
+			else if (mapping.Type == MappingType.Nested && sourceValue != null)
+			{
+				var nestedResult = MapInternal(sourceValue, mapping.SourceProperty.PropertyType,
+					mapping.DestProperty.PropertyType, config);
+				mapping.DestProperty.SetValue(destination, nestedResult);
+			}
+		}
+
+		// Custom mappingleri işle (cache'de olmayan property'ler için)
+		if (rule != null)
+		{
+			var destProps = PropertyCache.GetProperties(destType);
+
+			foreach (var destProp in destProps)
+			{
+				if (!destProp.CanWrite) continue;
+
+				var propName = destProp.Name;
+
+				// Bu property zaten normal mapping'de işlenmişse skip et
+				if (mappings.Any(m => m.DestProperty.Name == propName))
+					continue;
+
+				// Custom mapping var mı kontrol et
+				if (rule.HasCustomMapping(propName))
+				{
+					var value = rule.GetCustomMapping(propName, source);
+					destProp.SetValue(destination, value);
+				}
 			}
 		}
 
 		return destination;
 	}
+
+
 }
