@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LightMapper;
-namespace ObjectMapper.Tests;
+namespace LightMapper.Tests;
 public class MapperConfigTests
 {
 	public class Person

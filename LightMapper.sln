@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36414.22 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightMapper", "LightMapper\LightMapper.csproj", "{F313BAEA-7E61-4068-BC2C-6CA835CD66B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectMapper.Tests", "ObjectMapper.Tests\ObjectMapper.Tests.csproj", "{91B70252-5B21-481D-B6C2-BA3E3CB83D11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightMapper.Tests", "ObjectMapper.Tests\LightMapper.Tests.csproj", "{91B70252-5B21-481D-B6C2-BA3E3CB83D11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

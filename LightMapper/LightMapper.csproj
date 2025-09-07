@@ -9,7 +9,7 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageId>ObjectMapper</PackageId>
+		<PackageId>LightMapper</PackageId>
 		<Version>1.0.0</Version>
 		<Authors>UlasCanDundar</Authors>
 		<Description>Lightweight object mapper for .NET (AutoMapper alternative)</Description>
