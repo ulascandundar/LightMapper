@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightMapper", "LightMapper\LightMapper.csproj", "{F313BAEA-7E61-4068-BC2C-6CA835CD66B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectMapper.Tests", "ObjectMapper.Tests\ObjectMapper.Tests.csproj", "{91B70252-5B21-481D-B6C2-BA3E3CB83D11}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F313BAEA-7E61-4068-BC2C-6CA835CD66B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F313BAEA-7E61-4068-BC2C-6CA835CD66B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F313BAEA-7E61-4068-BC2C-6CA835CD66B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F313BAEA-7E61-4068-BC2C-6CA835CD66B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91B70252-5B21-481D-B6C2-BA3E3CB83D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91B70252-5B21-481D-B6C2-BA3E3CB83D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91B70252-5B21-481D-B6C2-BA3E3CB83D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91B70252-5B21-481D-B6C2-BA3E3CB83D11}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68862BD6-13DC-4716-890F-E7A0F029AE1F}
+	EndGlobalSection
+EndGlobal

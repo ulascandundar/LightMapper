@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageId>ObjectMapper</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>UlasCanDundar</Authors>
+		<Description>Lightweight object mapper for .NET (AutoMapper alternative)</Description>
+		<PackageTags>mapper automapper reflection</PackageTags>
+	</PropertyGroup>
+</Project>
